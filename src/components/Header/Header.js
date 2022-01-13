@@ -39,9 +39,9 @@ const Header = () => {
         </DesktopActionGroup>
         <Logo />
         <SubscribeContainer>
-          <SubscribeButton>
+          <Button>
             Subscribe
-          </SubscribeButton>
+          </Button>
           <SubscribeLink href="/subscribe">
             Already a subscriber?
           </SubscribeLink>
@@ -66,22 +66,6 @@ const Row = styled(MaxWidthWrapper)`
   justify-content: space-between;
 `;
 
-const DesktopActionGroup = styled.div`
-  display: none;
-  @media ${QUERIES.laptopAndUp} { 
-    display: flex;
-    gap: 24px;
-  
-    /*
-      FIX: Remove the inline spacing that comes with
-      react-feather icons.
-    */
-    svg {
-      display: block;
-    }
-  }
-`;
-
 const ActionGroup = styled.div`
   display: flex;
   gap: 24px;
@@ -95,6 +79,13 @@ const ActionGroup = styled.div`
   }
 `;
 
+const DesktopActionGroup = styled(ActionGroup)`
+  display: none;
+  @media ${QUERIES.laptopAndUp} { 
+    display: flex;
+  }
+`;
+
 const MainHeader = styled(MaxWidthWrapper)`
   display: flex;
   align-items: center;
@@ -102,28 +93,38 @@ const MainHeader = styled(MaxWidthWrapper)`
   margin-top: 32px;
   margin-bottom: 48px;
 
+  @media ${QUERIES.tabletAndUp} { 
+    margin-top: 48px;
+    margin-bottom: 72px;
+  }
+
   @media ${QUERIES.laptopAndUp} { 
-    justify-content: space-between;
+    align-items: center;
+    justify-content: revert;
+    justify-items: start;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    margin-top: 16px;
+    margin-bottom: 72px;
   }
 `;
 
 const SubscribeContainer = styled.div`
   display: none;
+  
   @media ${QUERIES.laptopAndUp} { 
     display: flex;
     flex-direction: column;
+    justify-self: end;
+    align-items: center;
+    align-self: end;
+    gap: 8px;
   }
 `;
-
-const SubscribeButton = styled(Button)`
-  background: ${COLORS.primary};
-`
 
 const SubscribeLink = styled.a`
   color: ${COLORS.gray[900]};
   font-size: ${14 / 16}rem;
-  align-self: center;
-  margin-top: 8px;
   text-decoration: underline;
   font-style: italic;
 `;
